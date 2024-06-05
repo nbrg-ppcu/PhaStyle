@@ -1,8 +1,13 @@
 # ProkBERT PhaStyle
 
-## Description
-ProkBERT PhaStyle is a genomic language model specifically fine-tuned for accurate phage lifestyle prediction. It uses state-of-the-art transformer models to classify phage sequences as virulent or temperate, providing significant improvements over traditional computational methods.
+## Introduction
+Phage lifestyle prediction, which involves classifying phages as either virulent or temperate, is crucial in biomedical and ecological applications. This repository contains the code and models for ProkBERT PhaStyle, a tool designed for phage lifestyle prediction using genomic language models (GLMs). ProkBERT PhaStyle allows efficient direct analysis from nucleotide sequences without the need for complex preprocessing pipelines or manually curated databases.
 
+
+
+## Description
+Phage lifestyle prediction, which involves classifying phages as either virulent or temperate. This repository contains the code and models for ProkBERT PhaStyle, a tool designed for phage lifestyle prediction using genomic language models (GLMs).
+ProkBERT PhaStyle allows efficient direct analysis from nucleotide sequences without the need for complex preprocessing pipelines or manually curated databases.
 
 ## Table of Contents
 1. [Installation](#installation)
@@ -18,9 +23,9 @@ ProkBERT PhaStyle is a genomic language model specifically fine-tuned for accura
 ## Installation
 
 ### Prerequisites
-- Python 3.8 or higher
-- Git
+- Python 3.10 or higher
 - GPU with CUDA support (optional but recommended for training)
+- ProkBERT
 
 ### Steps
 1. **Clone the repository**
