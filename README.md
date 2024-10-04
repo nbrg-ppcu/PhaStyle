@@ -1,8 +1,7 @@
 # ProkBERT PhaStyle
 
-## Introduction
-Phage lifestyle prediction, which involves classifying phages as either virulent or temperate, is crucial in biomedical and ecological applications. This repository contains the code and models for ProkBERT PhaStyle, a tool designed for phage lifestyle prediction using genomic language models (GLMs). ProkBERT PhaStyle allows efficient direct analysis from nucleotide sequences without the need for complex preprocessing pipelines or manually curated databases.
-
+** UNDER DEVELOPMENT **
+RELEASE after 12th June
 
 
 ## Description
