@@ -69,9 +69,13 @@ python bin/PhaStyle.py \
     --modelclass BertForBinaryClassificationWithPooling \
     --per_device_eval_batch_size 196
 ```
-The scripts supports using the distributed GPU inference (nvcc framework were tested) for an example cmd please see the run_PhaStyle.sh. Consider using the torch compile option for large-scale inference tasks. 
-The recommended fine tuned model is the neuralbioinfo/PhaStyle-mini, however different model can be specied. The arguments for tekonization  and segmentation please see the ProkBERT documentations https://prokbert.readthedocs.io/en/latest/ or the example notebook for tokenization [colab link](https://colab.research.google.com/github/nbrg-ppcu/prokbert/blob/main/examples/Tokenization.ipynb) and segmentation [colab link](https://colab.research.google.com/github/nbrg-ppcu/prokbert/blob/main/examples/Segmentation.ipynb) (with nice figures and tables).  
-One can set and pass the common parameters for the hugginface training arguments [https://huggingface.co/docs/transformers/en/main_classes/trainer#transformers.TrainingArguments]. 
+The script supports distributed GPU inference (tested with the NVCC framework). For an example command, refer to the `bin/run_PhaStyle.sh` script. For large-scale inference tasks, consider using the `torch.compile` option for performance optimization.
+
+The recommended fine-tuned model is `neuralbioinfo/PhaStyle-mini`. For detailed arguments related to tokenization and segmentation, please consult the ProkBERT documentation or the following example notebooks:
+- [Tokenization Notebook](https://colab.research.google.com/github/nbrg-ppcu/prokbert/blob/main/examples/Tokenization.ipynb)
+- [Segmentation Notebook](https://colab.research.google.com/github/nbrg-ppcu/prokbert/blob/main/examples/Segmentation.ipynb)
+
+Both notebooks provide illustrative examples with nice figures and tables. Additionally, common parameters for Hugging Face's `TrainingArguments` can be customized and passed as necessary. For more details, see the [Hugging Face documentation](https://huggingface.co/docs/transformers/en/main_classes/trainer#transformers.TrainingArguments).
 
 
 ## Available models and datasets
