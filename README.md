@@ -94,7 +94,17 @@ One can set and pass the common parameters for the hugginface training arguments
 | `neuralbioinfo/bacterial_promoters` | [Link](https://huggingface.co/datasets/neuralbioinfo/bacterial_promoters) |
 | `neuralbioinfo/ESKAPE-masking` | [Link](https://huggingface.co/datasets/neuralbioinfo/ESKAPE-masking) |
 
+## Project Structure
 
+The repository is organized as follows:
+./ ├── assets/ # Contains figures and other resources used in documentation and presentations │ ├── figure_01.jpg │ ├── figure_02_method.png │ ├── figure_03.jpg ├── bin/ # Contains executable scripts for running the PhaStyle predictions │ ├── PhaStyle.py │ ├── PhaStyle_example.sh ├── containers/ # Container-related files, including Docker and Singularity definitions ├── data/ # Datasets used for model training and testing, organized by phage type │ ├── ESCHERICHIA/ │ ├── EXTREMOPHILE/ ├── examples/ # Example scripts and usage notebooks ├── LICENSE # License information for the repository ├── README.md # The main README file
+
+
+- **`assets/`**: Contains images and other media resources used for documentation or presentations.
+- **`bin/`**: Includes the executable scripts for phage lifestyle prediction, such as `PhaStyle.py` and example shell scripts.
+- **`containers/`**: Stores container files for easy setup using Docker or Singularity.
+- **`data/`**: Contains various datasets used for phage lifestyle predictions, organized by type (e.g., Escherichia, Extremophile).
+- **`examples/`**: Contains example code or usage notebooks to help users get started with the project.
 
 
 # Citing this work
