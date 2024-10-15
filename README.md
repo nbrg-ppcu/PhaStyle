@@ -114,7 +114,7 @@ The repository is organized as follows:
 ├── LICENSE                     # License information for the repository
 ├── README.md                   # The main README file
 
-
+d
 
 - **`bin/`**: Includes the executable scripts for phage lifestyle prediction, such as `PhaStyle.py` and example shell scripts.
 - **`containers/`**: Stores container files for easy setup using Docker or Singularity.
