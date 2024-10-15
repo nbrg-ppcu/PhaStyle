@@ -97,7 +97,7 @@ One can set and pass the common parameters for the hugginface training arguments
 ## Project Structure
 
 The repository is organized as follows:
-
+```
 ./
 ├── assets/                     # Contains figures and other resources used in documentation and presentations
 │   ├── figure_01.jpg
@@ -113,8 +113,7 @@ The repository is organized as follows:
 ├── examples/                   # Example scripts and usage notebooks
 ├── LICENSE                     # License information for the repository
 ├── README.md                   # The main README file
-
-d
+```
 
 - **`bin/`**: Includes the executable scripts for phage lifestyle prediction, such as `PhaStyle.py` and example shell scripts.
 - **`containers/`**: Stores container files for easy setup using Docker or Singularity.
