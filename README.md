@@ -21,12 +21,8 @@ ProkBERT PhaStyle is a tool designed for phage lifestyle prediction, classifying
     - [Command-Line Arguments](#command-line-arguments)
     - [Example](#example)
 3. [Models](#models)
-4. [Benchmarking](#benchmarking)
-5. [Evaluation](#evaluation)
-6. [Contributing](#contributing)
-7. [License](#license)
-8. [Acknowledgements](#acknowledgements)
-9. [References](#references)
+4. [Acknowledgements](#acknowledgements)
+5. [References](#references)
 
 ## Installation
 
@@ -34,6 +30,7 @@ ProkBERT PhaStyle is a tool designed for phage lifestyle prediction, classifying
 - **ProkBERT** package
 
 ### Installation Steps
+The only prerequestics is the ProkBERT. We reccomend to use python 3.10 
 
 1. **Clone the repository**
 
@@ -50,18 +47,12 @@ ProkBERT PhaStyle is a tool designed for phage lifestyle prediction, classifying
     ```
 
 3. **Install the ProkBERT package**
-
-    If ProkBERT is not a standalone package, include the `prokbert` directory in your `PYTHONPATH` or install it directly:
-
-    ```bash
-    pip install -e .
-    ```
-
-    or
+    Followed the instruction of installing ProkBERT.     
 
     ```bash
-    export PYTHONPATH="${PYTHONPATH}:$(pwd)/prokbert"
+    pip install prokbert
     ```
+
 
 ## Usage
 
