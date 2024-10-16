@@ -3,8 +3,6 @@
 
 # ProkBERT PhaStyle
 ** UNDER DEVELOPMENT **
-RELEASE after 12th June
-
 
 
 ## Description
@@ -90,6 +88,11 @@ Both notebooks provide illustrative examples with nice figures and tables. Addit
 
 
 ### Datasets
+![Dataset Structure](https://github.com/nbrg-ppcu/PhaStyle/blob/main/assets/figure_01.jpg?raw=true)
+
+*Figure 1: The dataset used in the ProkBERT PhaStyle study. Phage sequences from multiple independent data sources were segmented into 512bp and 1022bp fragments for training and testing models on phage lifestyle prediction. The dataset consists of the BACPHLIP training and validation sets, Escherichia phages (from the Guelin collection), and phages from extreme environments.*
+
+
 
 | Dataset Name | Hugging Face URL |
 | --- | --- |
