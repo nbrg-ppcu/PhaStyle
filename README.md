@@ -1,15 +1,8 @@
-# ProkBERT PhaStyle
-
-
-# ProkBERT PhaStyle
-** UNDER DEVELOPMENT **
-RELEASE after 12th June
-
-
-
 ## Description
 
-ProkBERT PhaStyle is a tool designed for phage lifestyle prediction, classifying phages as either **virulent** or **temperate**. This repository contains the code and models for ProkBERT PhaStyle, utilizing genomic language models (GLMs) for efficient analysis directly from nucleotide sequences without the need for complex preprocessing pipelines or manually curated databases.
+ProkBERT PhaStyle is a BERT-based genomic language model fine-tuned for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
+
+This model is particularly useful in scenarios involving fragmented sequences from metagenomic and metavirome studies, eliminating the need for complex preprocessing pipelines or manually curated databases. 
 
 ## Table of Contents
 
@@ -25,35 +18,37 @@ ProkBERT PhaStyle is a tool designed for phage lifestyle prediction, classifying
 5. [References](#references)
 
 ## Installation
-The only prerequestics is the ProkBERT. We reccomend to use python 3.10 for fully get advantage of the features of pytorch (model compilation).
+
+Before installing ProkBERT PhaStyle, ensure that the [ProkBERT package](https://github.com/nbrg-ppcu/prokbert) is installed. We highly recommend setting up a virtual environment to isolate dependencies.
 
 ### Prerequisites
-- **ProkBERT** package
+
+- Python 3.10 (recommended for optimal PyTorch performance)
+- **ProkBERT** package (install instructions below)
 
 ### Installation Steps
 
-
-1. **Clone the repository**
+1. Clone the repository:
 
     ```bash
     git clone https://github.com/nbrg-ppcu/prokbert-phastyle.git
     cd prokbert-phastyle
     ```
 
-2. **Set up a virtual environment (optional but recommended)**
+2. Set up a virtual environment:
 
     ```bash
     python -m venv env
     source env/bin/activate  # On Windows use `env\Scripts\activate`
     ```
 
-3. **Install the ProkBERT package**
-    Followed the instruction of installing ProkBERT.     
+3. Install the ProkBERT package:
+
+    Follow the instructions to install [ProkBERT](https://github.com/nbrg-ppcu/prokbert). After that, install the required dependencies:
 
     ```bash
     pip install prokbert
     ```
-
 
 ## Usage
 
