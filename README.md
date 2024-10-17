@@ -1,5 +1,6 @@
 # ProkBERT PhaStyle
 
+
 ## Description
 
 ProkBERT PhaStyle is a BERT-based genomic language model fine-tuned for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
@@ -269,6 +270,7 @@ The structure of the dataset is explained visually in the following figure:
    - **Hugging Face Link**: [PhaStyle-ESCHERICHIA](https://huggingface.co/datasets/neuralbioinfo/PhaStyle-ESCHERICHIA)
 
 ### Summary Table
+
 
 | Dataset Name                | Description                                                                                                          | Hugging Face Link                                                                                       |
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
