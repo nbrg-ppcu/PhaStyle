@@ -219,6 +219,13 @@ By leveraging ProkBERT PhaStyle, you can achieve high accuracy in phage lifestyl
 ## Datasets
 
 The ProkBERT PhaStyle model was trained and evaluated using several carefully curated datasets. These datasets consist of phage sequences labeled with their lifestyles (virulent or temperate) and are segmented to simulate real-world scenarios where sequences may be fragmented. Below is a summary of the available datasets, including descriptions and links to their corresponding Hugging Face repositories.
+The structure of the dataset is explained visually in the following figure:
+
+![ProkBERT PhaStyle Workflow](https://github.com/nbrg-ppcu/PhaStyle/blob/main/assets/figure_01.jpg)
+*Figure 2: The dataset used in the ProkBERT PhaStyle study. Phage sequences from multiple independent data sources were segmented into 512bp and 1022bp fragments for training and testing models on phage lifestyle prediction. The dataset consists of the BACPHLIP training and validation sets, Escherichia phages (from the Guelin collection), and phages from extreme environments.*
+
+
+
 
 ### Available Datasets
 
