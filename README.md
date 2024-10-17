@@ -364,6 +364,14 @@ The repository is organized as follows:
 - **`data/`**: Contains various datasets used for phage lifestyle predictions, organized by type (e.g., Escherichia, Extremophile).
 - **`examples/`**: Contains example code or usage notebooks to help users get started with the project.
 
+## Contact
+
+For questions, feedback, or collaboration opportunities, please contact:
+
+- **Balázs Ligeti** (Corresponding Author)
+  - Email: [obalasz@gmail.com](mailto:obalasz@gmail.com)
+  - ORCID: [0000-0003-0301-0434](https://orcid.org/0000-0003-0301-0434)
+  - 
 
 # Citing this work
 
