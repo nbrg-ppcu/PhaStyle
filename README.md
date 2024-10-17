@@ -216,16 +216,85 @@ By leveraging ProkBERT PhaStyle, you can achieve high accuracy in phage lifestyl
 | `neuralbioinfo/prokbert-mini-long-phage` | 6 | 2 | [Link](https://huggingface.co/neuralbioinfo/prokbert-mini-long-phage) |
 | `neuralbioinfo/prokbert-mini-c-phage` | 1 | 1 | [Link](https://huggingface.co/neuralbioinfo/prokbert-mini-c-phage) |
 
+## Datasets
 
+The ProkBERT PhaStyle model was trained and evaluated using several carefully curated datasets. These datasets consist of phage sequences labeled with their lifestyles (virulent or temperate) and are segmented to simulate real-world scenarios where sequences may be fragmented. Below is a summary of the available datasets, including descriptions and links to their corresponding Hugging Face repositories.
 
-### Datasets
+### Available Datasets
 
-| Dataset Name | Hugging Face URL |
-| --- | --- |
-| `neuralbioinfo/ESKAPE-genomic-features` | [Link](https://huggingface.co/datasets/neuralbioinfo/ESKAPE-genomic-features) |
-| `neuralbioinfo/phage-test-10k` | [Link](https://huggingface.co/datasets/neuralbioinfo/phage-test-10k) |
-| `neuralbioinfo/bacterial_promoters` | [Link](https://huggingface.co/datasets/neuralbioinfo/bacterial_promoters) |
-| `neuralbioinfo/ESKAPE-masking` | [Link](https://huggingface.co/datasets/neuralbioinfo/ESKAPE-masking) |
+1. **PhaStyle-SequenceDB**
+   - **Description**: A comprehensive dataset containing phage sequences from multiple sources, including the BACPHLIP training and validation sets, *Escherichia* phages from the Guelin collection, and phages from extreme environments.
+   - **Usage**: Used for training and evaluating the ProkBERT PhaStyle model on phage lifestyle prediction tasks.
+   - **Hugging Face Link**: [PhaStyle-SequenceDB](https://huggingface.co/datasets/neuralbioinfo/PhaStyle-SequenceDB)
+
+2. **PhageStyle-BACPHLIP**
+   - **Description**: Consists of phage sequences from the BACPHLIP dataset, segmented into 512bp and 1022bp fragments. The training set excludes *Escherichia coli* sequences to test the model's generalization capabilities.
+   - **Usage**: Used for training the ProkBERT PhaStyle model, ensuring it can generalize to phages not seen during training.
+   - **Hugging Face Link**: [PhageStyle-BACPHLIP](https://huggingface.co/datasets/neuralbioinfo/PhageStyle-BACPHLIP)
+
+3. **PhaStyle-EXTREMOPHILE**
+   - **Description**: A test dataset containing phage sequences isolated from extreme environments such as deep-sea trenches, acidic, and arsenic-rich habitats. These sequences are segmented into 512bp and 1022bp fragments.
+   - **Usage**: Used to evaluate the model's performance and generalization on phages from underrepresented environments.
+   - **Hugging Face Link**: [PhaStyle-EXTREMOPHILE](https://huggingface.co/datasets/neuralbioinfo/PhaStyle-EXTREMOPHILE)
+
+4. **PhaStyle-ESCHERICHIA**
+   - **Description**: Contains *Escherichia* phage sequences, including the Guelin collection and additional high-quality temperate phages. The sequences are segmented to simulate fragmented assemblies.
+   - **Usage**: Used to test the model's ability to generalize to *Escherichia* phages, which were excluded from the training set.
+   - **Hugging Face Link**: [PhaStyle-ESCHERICHIA](https://huggingface.co/datasets/neuralbioinfo/PhaStyle-ESCHERICHIA)
+
+### Summary Table
+
+| Dataset Name                | Description                                                                                                          | Hugging Face Link                                                                                       |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **PhaStyle-SequenceDB**     | Comprehensive dataset of phage sequences from multiple sources, segmented for training and evaluation.               | [PhaStyle-SequenceDB](https://huggingface.co/datasets/neuralbioinfo/PhaStyle-SequenceDB)                |
+| **PhageStyle-BACPHLIP**     | BACPHLIP training and validation sets segmented into 512bp and 1022bp fragments, excluding *E. coli* sequences.      | [PhageStyle-BACPHLIP](https://huggingface.co/datasets/neuralbioinfo/PhageStyle-BACPHLIP)                |
+| **PhaStyle-EXTREMOPHILE**   | Phage sequences from extreme environments, segmented to test model generalization on underrepresented phages.        | [PhaStyle-EXTREMOPHILE](https://huggingface.co/datasets/neuralbioinfo/PhaStyle-EXTREMOPHILE)            |
+| **PhaStyle-ESCHERICHIA**    | *Escherichia* phage sequences segmented to evaluate model performance on this genus, not included in training data. | [PhaStyle-ESCHERICHIA](https://huggingface.co/datasets/neuralbioinfo/PhaStyle-ESCHERICHIA)              |
+
+### Dataset Details
+
+#### 1. PhaStyle-SequenceDB
+
+- **Structure**: Includes sequences from the BACPHLIP dataset, *Escherichia* phages, and extremophile phages.
+- **Segment Lengths**: Sequences are segmented into 512bp and 1022bp fragments.
+- **Purpose**: Provides a diverse dataset for training and evaluating phage lifestyle prediction models.
+
+#### 2. PhageStyle-BACPHLIP
+
+- **Training Set**: Contains 1,868 phage sequences (excluding *E. coli*), segmented into 512bp and 1022bp fragments.
+- **Validation Set**: Includes 246 *E. coli* phage sequences, used to validate model generalization.
+
+#### 3. PhaStyle-EXTREMOPHILE
+
+- **Phage Sources**: Phages from deep-sea environments, acidic habitats, and arsenic-rich microbial mats.
+- **Segment Lengths**: 512bp and 1022bp segments.
+- **Challenge**: Tests model performance on phages not represented in standard training datasets.
+
+#### 4. PhaStyle-ESCHERICHIA
+
+- **Composition**: 394 *Escherichia* phages, including the Guelin collection and high-quality temperate phages.
+- **Segmentation**: Sequences are broken into fragments to simulate assembly artifacts.
+- **Evaluation**: Assesses the model's ability to accurately predict lifestyles of *Escherichia* phages.
+
+### How to Access the Datasets
+
+The datasets are available on Hugging Face and can be accessed using the `datasets` library:
+
+```python
+from datasets import load_dataset
+
+# Load PhaStyle-SequenceDB
+sequence_db = load_dataset("neuralbioinfo/PhaStyle-SequenceDB")
+
+# Load PhageStyle-BACPHLIP
+bacphlip_db = load_dataset("neuralbioinfo/PhageStyle-BACPHLIP")
+
+# Load PhaStyle-EXTREMOPHILE
+extremophile_db = load_dataset("neuralbioinfo/PhaStyle-EXTREMOPHILE")
+
+# Load PhaStyle-ESCHERICHIA
+escherichia_db = load_dataset("neuralbioinfo/PhaStyle-ESCHERICHIA")
+```
 
 ## Project Structure
 
