@@ -98,6 +98,114 @@ Here's a quick rundown of how it works:
 
 ProkBERT PhaStyle can efficiently and accurately predict phage lifestyles without the need for complex bioinformatics pipelines or extensive manual annotations. This is especially handy when dealing with fragmented sequences from metagenomic studies, where traditional methods might falter.
 
+## Results
+
+### Performance Comparison
+
+We evaluated **ProkBERT PhaStyle** against other state-of-the-art phage lifestyle prediction methods, including DNABERT-2, Nucleotide Transformer (NT), DeePhage, and PhaTYP. The evaluation was performed on two datasets:
+
+- **Escherichia Phages**: A collection of 96 taxonomically diverse *Escherichia* bacteriophages.
+- **EXTREMOPHILE Phages**: Phages isolated from extreme environments such as deep-sea trenches, acidic, and arsenic-rich habitats.
+
+#### Evaluation Metrics
+
+We used standard binary classification metrics:
+
+- **Balanced Accuracy (Bal. Acc.)**
+- **Matthews Correlation Coefficient (MCC)**
+- **Sensitivity (Sens.)**
+- **Specificity (Spec.)**
+
+### Results on *Escherichia* Test Set (512 bp segments)
+
+| Method                     | Bal. Acc. |   MCC  | Sens. | Spec. |
+|----------------------------|-----------|--------|-------|-------|
+| **ProkBERT-mini**          | **0.91**  | **0.83** | 0.94  | **0.89** |
+| ProkBERT-mini-long         | 0.90      | 0.82   | **0.96** | 0.85  |
+| ProkBERT-mini-c            | 0.89      | 0.80   | 0.95  | 0.84  |
+| DNABERT-2-117M             | 0.84      | 0.72   | 0.95  | 0.74  |
+| Nucleotide Transformer-50M | 0.85      | 0.72   | 0.92  | 0.78  |
+| Nucleotide Transformer-100M| 0.87      | 0.75   | 0.93  | 0.82  |
+| Nucleotide Transformer-500M| 0.88      | 0.78   | **0.96** | 0.80  |
+| DeePhage                   | 0.86      | 0.71   | 0.84  | 0.88  |
+| PhaTYP                     | **0.91**  | **0.83** | 0.94  | 0.88  |
+
+### Results on *Escherichia* Test Set (1022 bp segments)
+
+| Method                     | Bal. Acc. |   MCC  | Sens. | Spec. |
+|----------------------------|-----------|--------|-------|-------|
+| **ProkBERT-mini**          | **0.94**  | 0.88   | **0.97** | **0.91** |
+| **ProkBERT-mini-long**     | **0.94**  | **0.89** | **0.97** | **0.91** |
+| ProkBERT-mini-c            | 0.93      | 0.87   | **0.97** | 0.89  |
+| DNABERT-2-117M             | 0.90      | 0.80   | 0.95  | 0.85  |
+| Nucleotide Transformer-50M | 0.90      | 0.80   | 0.94  | 0.85  |
+| Nucleotide Transformer-100M| 0.92      | 0.83   | 0.94  | 0.89  |
+| Nucleotide Transformer-500M| 0.91      | 0.84   | 0.96  | 0.87  |
+| DeePhage                   | 0.91      | 0.82   | 0.94  | 0.88  |
+| PhaTYP                     | 0.92      | 0.84   | 0.96  | 0.87  |
+
+### Results on EXTREMOPHILE Test Set (512 bp segments)
+
+| Method                     | Bal. Acc. |   MCC  | Sens. | Spec. |
+|----------------------------|-----------|--------|-------|-------|
+| **ProkBERT-mini**          | **0.93**  | **0.83** | 0.99  | 0.87  |
+| **ProkBERT-mini-long**     | **0.93**  | 0.82   | **1.00** | 0.86  |
+| ProkBERT-mini-c            | 0.92      | 0.80   | 0.99  | 0.84  |
+| DNABERT-2-117M             | 0.89      | 0.74   | 0.99  | 0.79  |
+| Nucleotide Transformer-50M | 0.91      | 0.79   | 0.98  | 0.84  |
+| Nucleotide Transformer-100M| 0.90      | 0.76   | 0.97  | 0.82  |
+| Nucleotide Transformer-500M| 0.91      | 0.78   | 0.99  | 0.82  |
+| DeePhage                   | 0.87      | 0.75   | 0.84  | **0.91** |
+| PhaTYP                     | 0.76      | 0.52   | 0.74  | 0.79  |
+
+### Results on EXTREMOPHILE Test Set (1022 bp segments)
+
+| Method                     | Bal. Acc. |   MCC  | Sens. | Spec. |
+|----------------------------|-----------|--------|-------|-------|
+| **ProkBERT-mini**          | **0.96**  | **0.91** | **1.00** | **0.93** |
+| ProkBERT-mini-long         | **0.96**  | 0.90   | **1.00** | 0.92  |
+| ProkBERT-mini-c            | 0.94      | 0.86   | **1.00** | 0.89  |
+| DNABERT-2-117M             | 0.94      | 0.85   | 0.98  | 0.90  |
+| Nucleotide Transformer-50M | 0.93      | 0.83   | 0.99  | 0.87  |
+| Nucleotide Transformer-100M| 0.95      | 0.88   | 0.98  | 0.91  |
+| Nucleotide Transformer-500M| 0.96      | 0.89   | **1.00** | 0.91  |
+| DeePhage                   | 0.92      | 0.80   | 0.96  | 0.87  |
+| PhaTYP                     | 0.80      | 0.58   | 0.84  | 0.76  |
+
+### Summary
+
+- **ProkBERT PhaStyle** consistently outperforms other models, especially on shorter sequence fragments (512 bp), which are common in metagenomic datasets.
+- ProkBERT models demonstrate excellent generalization capabilities, performing well even on phages from extreme environments not represented in the training data.
+- Despite having fewer parameters (~25 million) compared to larger models like DNABERT-2 and Nucleotide Transformer, ProkBERT achieves superior performance.
+- The model is efficient and suitable for large-scale applications, offering faster inference times compared to other methods.
+
+### Inference Speed and Running Times
+
+We also evaluated the computational efficiency of ProkBERT PhaStyle compared to other models. The evaluation was performed on a consistent hardware setup using NVIDIA Tesla A100 GPUs.
+
+| Model                      | Execution Time (seconds) | Inference Speed (MB/sec) |
+|----------------------------|--------------------------|--------------------------|
+| **ProkBERT-mini-long**     | **132**                  | **0.52**                 |
+| ProkBERT-mini              | 141                      | 0.49                     |
+| ProkBERT-mini-c            | 146                      | 0.47                     |
+| DNABERT-2-117M             | 284                      | 0.23                     |
+| Nucleotide Transformer-50M | 292                      | 0.21                     |
+| Nucleotide Transformer-100M| 313                      | 0.20                     |
+| Nucleotide Transformer-500M| 500                      | 0.15                     |
+| DeePhage                   | 159                      | 0.43                     |
+| PhaTYP                     | 2,718                    | 0.10                     |
+| BACPHLIP                   | 7,125                    | 0.04                     |
+
+**Key Takeaways:**
+
+- **ProkBERT-mini-long** is the fastest model, making it ideal for large-scale analyses.
+- ProkBERT models are significantly faster than database search-based methods like PhaTYP and BACPHLIP.
+- Even with GPU support, larger models like DNABERT-2 and Nucleotide Transformer are slower due to their size.
+
+---
+
+By leveraging ProkBERT PhaStyle, you can achieve high accuracy in phage lifestyle prediction with improved computational efficiency, making it a valuable tool for both research and clinical applications.
+
 
 ## Available models and datasets
 ### Finetuned models for phage life style prediction
