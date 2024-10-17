@@ -1,21 +1,40 @@
+# ProkBERT PhaStyle
+
 ## Description
 
 ProkBERT PhaStyle is a BERT-based genomic language model fine-tuned for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
 
-This model is particularly useful in scenarios involving fragmented sequences from metagenomic and metavirome studies, eliminating the need for complex preprocessing pipelines or manually curated databases. 
+This model is particularly useful in scenarios involving fragmented sequences from metagenomic and metavirome studies, eliminating the need for complex preprocessing pipelines or manually curated databases.
 
 ## Table of Contents
 
 1. [Installation](#installation)
-    - [Prerequisites](#prerequisites)
-    - [Installation Steps](#installation-steps)
+   - [Prerequisites](#prerequisites)
+   - [Installation Steps](#installation-steps)
 2. [Usage](#usage)
-    - [Quick Start](#quick-start)
-    - [Command-Line Arguments](#command-line-arguments)
-    - [Example](#example)
-3. [Models](#models)
-4. [Acknowledgements](#acknowledgements)
-5. [References](#references)
+   - [Quick Start](#quick-start)
+3. [Model Description](#model-description)
+   - [How ProkBERT PhaStyle Works](#how-prokbert-phastyle-works)
+   - [Why It Matters](#why-it-matters)
+4. [Results](#results)
+   - [Performance Comparison](#performance-comparison)
+     - [Evaluation Metrics](#evaluation-metrics)
+     - [Results on *Escherichia* Test Set (512 bp segments)](#results-on-escherichia-test-set-512-bp-segments)
+     - [Results on *Escherichia* Test Set (1022 bp segments)](#results-on-escherichia-test-set-1022-bp-segments)
+     - [Results on EXTREMOPHILE Test Set (512 bp segments)](#results-on-extremophile-test-set-512-bp-segments)
+     - [Results on EXTREMOPHILE Test Set (1022 bp segments)](#results-on-extremophile-test-set-1022-bp-segments)
+     - [Summary](#summary)
+   - [Inference Speed and Running Times](#inference-speed-and-running-times)
+5. [Available Models and Datasets](#available-models-and-datasets)
+   - [Fine-tuned Models for Phage Lifestyle Prediction](#fine-tuned-models-for-phage-lifestyle-prediction)
+6. [Datasets](#datasets)
+   - [Available Datasets](#available-datasets)
+   - [Summary Table](#summary-table)
+   - [Dataset Details](#dataset-details)
+   - [How to Access the Datasets](#how-to-access-the-datasets)
+7. [Project Structure](#project-structure)
+8. [License](#license)
+9. [Citing this Work](#citing-this-work)
 
 ## Installation
 
