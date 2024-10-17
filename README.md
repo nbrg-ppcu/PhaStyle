@@ -72,6 +72,32 @@ The recommended fine-tuned model is `neuralbioinfo/PhaStyle-mini`. For detailed 
 
 Both notebooks provide illustrative examples with nice figures and tables. Additionally, common parameters for Hugging Face's `TrainingArguments` can be customized and passed as necessary. For more details, see the [Hugging Face documentation](https://huggingface.co/docs/transformers/en/main_classes/trainer#transformers.TrainingArguments).
 
+## Model Description
+
+### How ProkBERT PhaStyle Works
+
+![ProkBERT PhaStyle Workflow](https://github.com/nbrg-ppcu/PhaStyle/blob/main/assets/figure_02.jpg)
+
+ProkBERT PhaStyle is a genomic language model fine-tuned to predict phage lifestyles—specifically, whether a phage is **virulent** or **temperate**—directly from nucleotide sequences.
+
+Here's a quick rundown of how it works:
+
+1. **Segmentation**: We start with phage genomic sequences (contigs). Since these sequences can be quite long, we break each contig into smaller pieces called segments (e.g., S₁ becomes S₁₁, S₁₂, S₁₃). This makes processing more manageable and helps in handling fragmented sequences from metagenomic data.
+
+2. **Tokenization**: Each segment is then converted into a series of k-mers using Local Context Attention (LCA) tokenization. Think of k-mers as overlapping chunks of k nucleotides that help the model grasp the sequence patterns.
+
+3. **Encoding with ProkBERT**: The tokenized segments are fed into the ProkBERT encoder. ProkBERT is a transformer-based model pretrained on a vast collection of prokaryotic genomes. It generates contextual embeddings for each token, capturing intricate patterns in the genomic data.
+
+4. **Classification**: A classification head (a simple neural layer added on top) processes the embeddings to predict the probability of each segment being virulent (P_vir) or temperate (P_tem).
+
+5. **Aggregation**: To determine the lifestyle of the entire contig, we aggregate the predictions from all its segments. This is usually done by averaging the probabilities or using a weighted voting scheme.
+
+6. **Final Prediction**: The aggregated probabilities give us a final verdict on whether the phage is virulent or temperate.
+
+### Why It Matters
+
+ProkBERT PhaStyle can efficiently and accurately predict phage lifestyles without the need for complex bioinformatics pipelines or extensive manual annotations. This is especially handy when dealing with fragmented sequences from metagenomic studies, where traditional methods might falter.
+
 
 ## Available models and datasets
 ### Finetuned models for phage life style prediction
