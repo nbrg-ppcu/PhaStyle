@@ -84,6 +84,20 @@ python bin/PhaStyle.py \
     --modelclass BertForBinaryClassificationWithPooling \
     --per_device_eval_batch_size 196
 ```
+
+### Explanation of Parameters:
+- `--fastain`: Specifies the path to the input FASTA file containing the sequences you want to classify. In this example, it is set to `data/EXTREMOPHILE/extremophiles.fasta`, which is the input dataset.
+
+- `--out`: Defines the output file where the inference results will be saved. Here, it is set to `output_predictions.tsv`, meaning the results will be written in a tab-separated values format.
+
+- `--ftmodel`: Defines the fine-tuned model to be used for inference. In this case, the model `neuralbioinfo/PhaStyle-mini` is used, which is a pre-trained version of PhaStyle.
+
+- `--modelclass`: Specifies the model class that implements the neural network structure for the analysis. Here, `BertForBinaryClassificationWithPooling` is used, which is suited for binary classification tasks with an added pooling layer for feature aggregation.
+
+- `--per_device_eval_batch_size`: Sets the number of samples processed per device (GPU/CPU) during evaluation. A batch size of `196` is used in this example for efficient processing.
+
+
+
 The script supports distributed GPU inference (tested with the NVCC framework). For an example command, refer to the `bin/run_PhaStyle.sh` script. For large-scale inference tasks, consider using the `torch.compile` option for performance optimization.
 
 The recommended fine-tuned model is `neuralbioinfo/PhaStyle-mini`. For detailed arguments related to tokenization and segmentation, please consult the ProkBERT documentation or the following example notebooks:
@@ -350,6 +364,14 @@ The repository is organized as follows:
 - **`data/`**: Contains various datasets used for phage lifestyle predictions, organized by type (e.g., Escherichia, Extremophile).
 - **`examples/`**: Contains example code or usage notebooks to help users get started with the project.
 
+## Contact
+
+For questions, feedback, or collaboration opportunities, please contact:
+
+- **Balázs Ligeti** (Corresponding Author)
+  - Email: [obalasz@gmail.com](mailto:obalasz@gmail.com)
+  - ORCID: [0000-0003-0301-0434](https://orcid.org/0000-0003-0301-0434)
+  - 
 
 # Citing this work
 
