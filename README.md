@@ -43,8 +43,7 @@ Before installing ProkBERT PhaStyle, ensure that the [ProkBERT package](https://
 
 ### Prerequisites
 
-- Python 3.10 (recommended for optimal PyTorch performance)
-- **ProkBERT** package (install instructions below)
+- Python 3.12 (recommended)
 
 ### Installation Steps
 
@@ -55,19 +54,11 @@ Before installing ProkBERT PhaStyle, ensure that the [ProkBERT package](https://
     cd prokbert-phastyle
     ```
 
-2. Set up a virtual environment:
+2. Install the ProkBERT package:
 
     ```bash
-    python -m venv env
-    source env/bin/activate  # On Windows use `env\Scripts\activate`
-    ```
-
-3. Install the ProkBERT package:
-
-    Follow the instructions to install [ProkBERT](https://github.com/nbrg-ppcu/prokbert). After that, install the required dependencies:
-
-    ```bash
-    pip install prokbert
+    pip install git+https://github.com/nbrg-ppcu/prokbert.git
+    pip install transformers datasets
     ```
 
 ## Usage
@@ -81,7 +72,6 @@ python bin/PhaStyle.py \
     --fastain data/EXTREMOPHILE/extremophiles.fasta \
     --out output_predictions.tsv \
     --ftmodel neuralbioinfo/PhaStyle-mini \
-    --modelclass BertForBinaryClassificationWithPooling \
     --per_device_eval_batch_size 196
 ```
 
@@ -92,11 +82,7 @@ python bin/PhaStyle.py \
 
 - `--ftmodel`: Defines the fine-tuned model to be used for inference. In this case, the model `neuralbioinfo/PhaStyle-mini` is used, which is a pre-trained version of PhaStyle.
 
-- `--modelclass`: Specifies the model class that implements the neural network structure for the analysis. Here, `BertForBinaryClassificationWithPooling` is used, which is suited for binary classification tasks with an added pooling layer for feature aggregation.
-
 - `--per_device_eval_batch_size`: Sets the number of samples processed per device (GPU/CPU) during evaluation. A batch size of `196` is used in this example for efficient processing.
-
-
 
 The script supports distributed GPU inference (tested with the NVCC framework). For an example command, refer to the `bin/run_PhaStyle.sh` script. For large-scale inference tasks, consider using the `torch.compile` option for performance optimization.
 
