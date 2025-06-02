@@ -51,7 +51,7 @@ Before installing ProkBERT PhaStyle, ensure that the [ProkBERT package](https://
 
     ```bash
     git clone https://github.com/nbrg-ppcu/PhaStyle/
-    cd prokbert-phastyle
+    cd PhaStyle
     ```
 
 2. Install the ProkBERT package:
