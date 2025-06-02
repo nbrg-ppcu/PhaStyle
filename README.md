@@ -50,7 +50,7 @@ Before installing ProkBERT PhaStyle, ensure that the [ProkBERT package](https://
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/nbrg-ppcu/prokbert-phastyle.git
+    git clone https://github.com/nbrg-ppcu/PhaStyle/
     cd prokbert-phastyle
     ```
 
