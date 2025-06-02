@@ -1,12 +1,7 @@
-import yaml
-import pathlib
 from os.path import join
 import os
-import sys
-import time
 import pandas as pd
 import torch
-from torch.utils.data import Dataset
 import numpy as np
 from transformers import TrainingArguments, Trainer
 from prokbert.sequtils import *
@@ -17,9 +12,8 @@ from prokbert.tokenizer import LCATokenizer
 import multiprocessing
 from transformers import AutoModelForSequenceClassification, DataCollatorWithPadding
 from datasets import Dataset
-# Get the local rank for distributed training (if any)
-local_rank = int(os.getenv('LOCAL_RANK', '0'))
-print('Local rank:', local_rank)
+
+
 
 default_segmentation_length = 512
 
@@ -216,7 +210,10 @@ def post_processing_predictions(predictions, hf_dataset, sequences):
     final_columns = ['sequence_id', 'fasta_id', 'predicted_label', 'score_temperate', 'score_virulent']
     final_columns_rename = ['sequence_id', 'predicted_label', 'score_temperate', 'score_virulent', 'fasta_id']
 
-    final_table = inference_binary_sequence_predictions(predictions, hf_dataset)    
+    final_table = inference_binary_sequence_predictions(predictions, hf_dataset)
+    #final_table.apply(lambda x:  'virulent' if x['predicted_label']=='class_1' else 'temperate', axis=1)
+    final_table['predicted_label'] = final_table.apply(lambda x:  'virulent' if x['predicted_label']=='class_1' else 'temperate', axis=1)
+
     final_table = final_table.merge(sequences[['sequence_id', 'fasta_id']], how='left',
                                      left_on='sequence_id', right_on='sequence_id')
     #print(final_table)
@@ -234,9 +231,6 @@ def main(parameters, args):
         args (Namespace): Parsed command-line arguments.
     """
     print('ProkBERT PhaSTYLE prediction!')
-    print(parameters)
-
-
 
     model_path = parameters["finetuning"]["ftmodel"]
     model, tokenizer = prepare_model(model_path)
