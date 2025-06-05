@@ -130,17 +130,23 @@ docker run --rm --gpus 1 \
     --per_device_eval_batch_size 196
 ```
 
-#### Singularity:
-Pull the Singularity image directly from Docker Hub:
-```bash
-singularity pull phastyle.sif docker://obalasz/phastyle:latest
-```
+#### Singularity or apptainer:
+To use ProkBERT PhaStyle in an Apptainer (formerly Singularity) container, follow these steps. This example assumes you have a local folder (`./phastyle_data`) containing your `input.fasta` file and that you want GPU support.
+
+1. **Pull (or build) the Apptainer image**  
+   You can pull the image directly from Docker Hub:
+   ```bash
+   apptainer pull phastyle.sif docker://obalasz/phastyle:latest
+    ```
+
+2. **Run the container with GPU support and bind your data folder**
 
 Assuming you have a local folder (e.g., ./phastyle_data) with input.fasta,
 run the container, bind the folder, and enable GPU support if available:
-```bash
 
-singularity exec --nv \
+
+```bash
+apptainer exec --nv \
   --bind "$(pwd)/phastyle_data":/workspace \
   phastyle.sif \
   python bin/PhaStyle.py \
