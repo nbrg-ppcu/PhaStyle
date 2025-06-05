@@ -9,8 +9,6 @@ ProkBERT PhaStyle is a genomic language model based solution for phage lifestyle
 For start you can try the PhaStyle in google colab notebook: 
  - PhaStyle notebook: [colab link](https://colab.research.google.com/github/nbrg-ppcu/PhaStyle/blob/main/bin/PhaStyleExample.ipynb) 
 
-https://github.com/nbrg-ppcu/PhaStyle/tree/main/bin
-
 
 ## Table of Contents
 
@@ -46,7 +44,7 @@ https://github.com/nbrg-ppcu/PhaStyle/tree/main/bin
 
 
 ### Prerequisites
-We highly recommend setting up a virtual environment to isolate dependencies. 
+We highly recommend setting up a virtual environment to isolate dependencies.
 
 - Python 3.12 (recommended)
 
@@ -65,6 +63,22 @@ We highly recommend setting up a virtual environment to isolate dependencies.
     pip install git+https://github.com/nbrg-ppcu/prokbert.git
     pip install transformers datasets
     ```
+  
+### Containers
+We provide docker containerized version of the PhaStyle:
+```bash
+docker pull obalasz/phastyle:latest
+```
+
+
+Building singularity container:
+```bash
+singularity pull phastyle.sif docker://obalasz/phastyle:latest
+```
+
+
+
+
 
 ## Usage
 
@@ -90,6 +104,46 @@ python bin/PhaStyle.py \
 - `--per_device_eval_batch_size`: Sets the number of samples processed per device (GPU/CPU) during evaluation. A batch size of `196` is used in this example for efficient processing.
 
 For large-scale inference tasks, consider using the `torch.compile` option as well as using nvcc or accelerate for performance optimization.
+
+
+### Using containers
+
+Docker example with GPU support. Assuming a folder that contains the fasta file named 'input.fasta':
+
+
+```bash
+docker run --rm --gpus 1 \
+  -v "$(pwd)/phastyle_data":/workspace \
+  obalasz/phastyle:latest \
+  python bin/PhaStyle.py \
+    --fastain /workspace/input.fasta \
+    --out /workspace/output_predictions.tsv \
+    --ftmodel neuralbioinfo/PhaStyle-mini \
+    --per_device_eval_batch_size 196
+```
+
+#### Singularity:
+Pull the Singularity image directly from Docker Hub:
+```bash
+singularity pull phastyle.sif docker://obalasz/phastyle:latest
+```
+
+Assuming you have a local folder (e.g., ./phastyle_data) with input.fasta,
+run the container, bind the folder, and enable GPU support if available:
+```bash
+
+singularity exec --nv \
+  --bind "$(pwd)/phastyle_data":/workspace \
+  phastyle.sif \
+  python bin/PhaStyle.py \
+    --fastain /workspace/input.fasta \
+    --out /workspace/output_predictions.tsv \
+    --ftmodel neuralbioinfo/PhaStyle-mini \
+    --per_device_eval_batch_size 196
+```
+
+  
+
 
 ## Model Description
 
