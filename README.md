@@ -5,6 +5,9 @@
 
 ProkBERT PhaStyle is a genomic language model based solution for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
 
+## TLDR
+For start you can try the PhaStyle in google colab notebook: 
+
 
 ## Table of Contents
 
@@ -83,13 +86,7 @@ python bin/PhaStyle.py \
 
 - `--per_device_eval_batch_size`: Sets the number of samples processed per device (GPU/CPU) during evaluation. A batch size of `196` is used in this example for efficient processing.
 
-The script supports distributed GPU inference (tested with the NVCC framework). For an example command, refer to the `bin/run_PhaStyle.sh` script. For large-scale inference tasks, consider using the `torch.compile` option for performance optimization.
-
-The recommended fine-tuned model is `neuralbioinfo/PhaStyle-mini`. For detailed arguments related to tokenization and segmentation, please consult the ProkBERT documentation or the following example notebooks:
-- [Tokenization Notebook](https://colab.research.google.com/github/nbrg-ppcu/prokbert/blob/main/examples/Tokenization.ipynb)
-- [Segmentation Notebook](https://colab.research.google.com/github/nbrg-ppcu/prokbert/blob/main/examples/Segmentation.ipynb)
-
-Both notebooks provide illustrative examples with nice figures and tables. Additionally, common parameters for Hugging Face's `TrainingArguments` can be customized and passed as necessary. For more details, see the [Hugging Face documentation](https://huggingface.co/docs/transformers/en/main_classes/trainer#transformers.TrainingArguments).
+For large-scale inference tasks, consider using the `torch.compile` option as well as using nvcc or accelerate for performance optimization.
 
 ## Model Description
 
@@ -192,7 +189,6 @@ We used standard binary classification metrics:
 | PhaTYP                     | 0.80      | 0.58   | 0.84  | 0.76  |
 
 ### Summary
-
 - **ProkBERT PhaStyle** consistently outperforms other models, especially on shorter sequence fragments (512 bp), which are common in metagenomic datasets.
 - ProkBERT models demonstrate excellent generalization capabilities, performing well even on phages from extreme environments not represented in the training data.
 - Despite having fewer parameters (~25 million) compared to larger models like DNABERT-2 and Nucleotide Transformer, ProkBERT achieves superior performance.
