@@ -175,9 +175,7 @@ Here's a quick rundown of how it works:
 
 6. **Final Prediction**: The aggregated probabilities give us a final verdict on whether the phage is virulent or temperate.
 
-### Why It Matters
 
-ProkBERT PhaStyle can efficiently and accurately predict phage lifestyles without the need for complex bioinformatics pipelines or extensive manual annotations. This is especially handy when dealing with fragmented sequences from metagenomic studies, where traditional methods might falter.
 
 ## Results
 
