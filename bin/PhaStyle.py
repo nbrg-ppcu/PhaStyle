@@ -80,9 +80,6 @@ def prepare_input_arguments():
 
     # Parse the arguments
     args = parser.parse_args()
-    print(args)
-    #1/0
-    # Get user-provided arguments (excluding defaults)
     user_provided_args = get_user_provided_args(args, parser)
     input_args2check = list( (set(user_provided_args.keys()) - {'help'}) | {'ftmodel'})
     parameter_group_names = list(prokbert_config.parameters.keys()) + ['inference']
@@ -211,12 +208,10 @@ def post_processing_predictions(predictions, hf_dataset, sequences):
     final_columns_rename = ['sequence_id', 'predicted_label', 'score_temperate', 'score_virulent', 'fasta_id']
 
     final_table = inference_binary_sequence_predictions(predictions, hf_dataset)
-    #final_table.apply(lambda x:  'virulent' if x['predicted_label']=='class_1' else 'temperate', axis=1)
     final_table['predicted_label'] = final_table.apply(lambda x:  'virulent' if x['predicted_label']=='class_1' else 'temperate', axis=1)
 
     final_table = final_table.merge(sequences[['sequence_id', 'fasta_id']], how='left',
                                      left_on='sequence_id', right_on='sequence_id')
-    #print(final_table)
     final_table.columns = final_columns_rename
     final_table = final_table[final_columns]
     return final_table
@@ -246,7 +241,6 @@ def main(parameters, args):
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
     tmp_output = "./prokbert_inference_output"
     os.makedirs(tmp_output, exist_ok=True)
-
 
     training_args = TrainingArguments(
         output_dir=tmp_output,
