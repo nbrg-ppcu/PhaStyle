@@ -3,9 +3,12 @@
 
 ## Description
 
-ProkBERT PhaStyle is a BERT-based genomic language model fine-tuned for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
+ProkBERT PhaStyle is a genomic language model based solution for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
 
-This model is particularly useful in scenarios involving fragmented sequences from metagenomic and metavirome studies, eliminating the need for complex preprocessing pipelines or manually curated databases.
+## TLDR example
+For start you can try the PhaStyle in google colab notebook: 
+ - PhaStyle notebook: [colab link](https://colab.research.google.com/github/nbrg-ppcu/PhaStyle/blob/main/bin/PhaStyleExample.ipynb) 
+
 
 ## Table of Contents
 
@@ -39,9 +42,9 @@ This model is particularly useful in scenarios involving fragmented sequences fr
 
 ## Installation
 
-Before installing ProkBERT PhaStyle, ensure that the [ProkBERT package](https://github.com/nbrg-ppcu/prokbert) is installed. We highly recommend setting up a virtual environment to isolate dependencies.
 
 ### Prerequisites
+We highly recommend setting up a virtual environment to isolate dependencies.
 
 - Python 3.12 (recommended)
 
@@ -60,8 +63,32 @@ Before installing ProkBERT PhaStyle, ensure that the [ProkBERT package](https://
     pip install git+https://github.com/nbrg-ppcu/prokbert.git
     pip install transformers datasets
     ```
+  
+### Containers
+We provide docker containerized version of the PhaStyle:
+```bash
+docker pull obalasz/phastyle:latest
+```
+
+
+Building singularity container:
+```bash
+singularity pull phastyle.sif docker://obalasz/phastyle:latest
+```
+
+
+
+
 
 ## Usage
+
+
+### Colab notebook 
+
+No instalation required. For start you can try the PhaStyle in google colab notebook: 
+ - PhaStyle notebook: [colab link](https://colab.research.google.com/github/nbrg-ppcu/PhaStyle/blob/main/bin/PhaStyleExample.ipynb) 
+
+
 
 ### Quick Start
 
@@ -84,13 +111,47 @@ python bin/PhaStyle.py \
 
 - `--per_device_eval_batch_size`: Sets the number of samples processed per device (GPU/CPU) during evaluation. A batch size of `196` is used in this example for efficient processing.
 
-The script supports distributed GPU inference (tested with the NVCC framework). For an example command, refer to the `bin/run_PhaStyle.sh` script. For large-scale inference tasks, consider using the `torch.compile` option for performance optimization.
+For large-scale inference tasks, consider using the `torch.compile` option as well as using nvcc or accelerate for performance optimization.
 
-The recommended fine-tuned model is `neuralbioinfo/PhaStyle-mini`. For detailed arguments related to tokenization and segmentation, please consult the ProkBERT documentation or the following example notebooks:
-- [Tokenization Notebook](https://colab.research.google.com/github/nbrg-ppcu/prokbert/blob/main/examples/Tokenization.ipynb)
-- [Segmentation Notebook](https://colab.research.google.com/github/nbrg-ppcu/prokbert/blob/main/examples/Segmentation.ipynb)
 
-Both notebooks provide illustrative examples with nice figures and tables. Additionally, common parameters for Hugging Face's `TrainingArguments` can be customized and passed as necessary. For more details, see the [Hugging Face documentation](https://huggingface.co/docs/transformers/en/main_classes/trainer#transformers.TrainingArguments).
+### Using containers
+
+Docker example with GPU support. Assuming a folder that contains the fasta file named 'input.fasta':
+
+
+```bash
+docker run --rm --gpus 1 \
+  -v "$(pwd)/phastyle_data":/workspace \
+  obalasz/phastyle:latest \
+  python bin/PhaStyle.py \
+    --fastain /workspace/input.fasta \
+    --out /workspace/output_predictions.tsv \
+    --ftmodel neuralbioinfo/PhaStyle-mini \
+    --per_device_eval_batch_size 196
+```
+
+#### Singularity:
+Pull the Singularity image directly from Docker Hub:
+```bash
+singularity pull phastyle.sif docker://obalasz/phastyle:latest
+```
+
+Assuming you have a local folder (e.g., ./phastyle_data) with input.fasta,
+run the container, bind the folder, and enable GPU support if available:
+```bash
+
+singularity exec --nv \
+  --bind "$(pwd)/phastyle_data":/workspace \
+  phastyle.sif \
+  python bin/PhaStyle.py \
+    --fastain /workspace/input.fasta \
+    --out /workspace/output_predictions.tsv \
+    --ftmodel neuralbioinfo/PhaStyle-mini \
+    --per_device_eval_batch_size 196
+```
+
+  
+
 
 ## Model Description
 
@@ -114,9 +175,7 @@ Here's a quick rundown of how it works:
 
 6. **Final Prediction**: The aggregated probabilities give us a final verdict on whether the phage is virulent or temperate.
 
-### Why It Matters
 
-ProkBERT PhaStyle can efficiently and accurately predict phage lifestyles without the need for complex bioinformatics pipelines or extensive manual annotations. This is especially handy when dealing with fragmented sequences from metagenomic studies, where traditional methods might falter.
 
 ## Results
 
@@ -193,7 +252,6 @@ We used standard binary classification metrics:
 | PhaTYP                     | 0.80      | 0.58   | 0.84  | 0.76  |
 
 ### Summary
-
 - **ProkBERT PhaStyle** consistently outperforms other models, especially on shorter sequence fragments (512 bp), which are common in metagenomic datasets.
 - ProkBERT models demonstrate excellent generalization capabilities, performing well even on phages from extreme environments not represented in the training data.
 - Despite having fewer parameters (~25 million) compared to larger models like DNABERT-2 and Nucleotide Transformer, ProkBERT achieves superior performance.
