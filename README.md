@@ -82,6 +82,14 @@ singularity pull phastyle.sif docker://obalasz/phastyle:latest
 
 ## Usage
 
+
+### Colab notebook 
+
+No instalation required. For start you can try the PhaStyle in google colab notebook: 
+ - PhaStyle notebook: [colab link](https://colab.research.google.com/github/nbrg-ppcu/PhaStyle/blob/main/bin/PhaStyleExample.ipynb) 
+
+
+
 ### Quick Start
 
 To perform phage lifestyle prediction on a FASTA file using a fine-tuned ProkBERT model, run the following command:
