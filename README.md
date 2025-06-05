@@ -5,8 +5,11 @@
 
 ProkBERT PhaStyle is a genomic language model based solution for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
 
-## TLDR
+## TLDR example
 For start you can try the PhaStyle in google colab notebook: 
+ - PhaStyle notebook: [colab link](https://colab.research.google.com/github/nbrg-ppcu/PhaStyle/blob/main/bin/PhaStyleExample.ipynb) 
+
+https://github.com/nbrg-ppcu/PhaStyle/tree/main/bin
 
 
 ## Table of Contents
