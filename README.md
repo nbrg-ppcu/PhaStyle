@@ -3,9 +3,8 @@
 
 ## Description
 
-ProkBERT PhaStyle is a BERT-based genomic language model fine-tuned for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
+ProkBERT PhaStyle is a genomic language model based solution for phage lifestyle prediction. It classifies phages as either **virulent** or **temperate** directly from nucleotide sequences, providing a fast, efficient, and accurate alternative to traditional database-based approaches.
 
-This model is particularly useful in scenarios involving fragmented sequences from metagenomic and metavirome studies, eliminating the need for complex preprocessing pipelines or manually curated databases.
 
 ## Table of Contents
 
@@ -39,9 +38,9 @@ This model is particularly useful in scenarios involving fragmented sequences fr
 
 ## Installation
 
-Before installing ProkBERT PhaStyle, ensure that the [ProkBERT package](https://github.com/nbrg-ppcu/prokbert) is installed. We highly recommend setting up a virtual environment to isolate dependencies.
 
 ### Prerequisites
+We highly recommend setting up a virtual environment to isolate dependencies. 
 
 - Python 3.12 (recommended)
 
