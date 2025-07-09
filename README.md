@@ -105,6 +105,7 @@ python bin/PhaStyle.py \
 - `--ftmodel`: Defines the fine-tuned model to be used for inference. In this case, the model `neuralbioinfo/PhaStyle-mini` is used, which is a pre-trained version of PhaStyle.
 
 - `--per_device_eval_batch_size`: Sets the number of samples processed per device (GPU/CPU) during evaluation. A batch size of `196` is used in this example for efficient processing.
+- `--num-cores`: Number of CPU cores used for tokenization
 
 For large-scale inference tasks, consider using the `torch.compile` option as well as using nvcc or accelerate for performance optimization.
 
