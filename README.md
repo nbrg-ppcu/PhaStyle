@@ -118,7 +118,7 @@ Docker example with GPU support. Assuming a folder that contains the fasta file 
 docker run --rm --gpus 1 \
   -v "$(pwd)/phastyle_data":/workspace \
   obalasz/phastyle:latest \
-  python bin/PhaStyle.py \
+  python /home/prokbert/PhaStyle/bin/PhaStyle.py \\
     --fastain /workspace/input.fasta \
     --out /workspace/output_predictions.tsv \
     --ftmodel neuralbioinfo/PhaStyle-mini \
