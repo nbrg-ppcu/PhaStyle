@@ -39,68 +39,57 @@ def preprocess_function(sample, tokenizer, max_length=512):
     return results
 
 
+
+
 def prepare_input_arguments():
     """
-    Prepare and validate input arguments for ProkBERT inference.
-
-    Parses command-line arguments and sets the configuration for the inference process.
+    Define and parse only the essential CLI arguments for PhaBERT inference.
 
     Returns:
-        prokbert_config (ProkBERTConfig): Configuration object for ProkBERT inference.
-        args (Namespace): Parsed command-line arguments.
+        parameters (dict): Nested dict for 'finetuning' and 'inference'.
+        args (Namespace): Raw argparse results.
     """
-    prokbert_config = ProkBERTConfig()
-    keyset = ['finetuning'] 
-    # Get the argument parser and mappings
-    parser, cmd_argument2group_param, group2param2cmdarg = prokbert_config.get_cmd_arg_parser(keyset)
+    parser = argparse.ArgumentParser(description="ProkBERT PhaSTYLE inference")
+    parser.add_argument(
+        "--fastain", required=True,
+        help="Path to input FASTA file for segmentation."
+    )
+    parser.add_argument(
+        "--out", required=True,
+        help="Path where the TSV results will be written."
+    )
+    parser.add_argument(
+        "--ftmodel", default="neuralbioinfo/PhaStyle-mini",
+        help="Pretrained model identifier or local path."
+    )
+    parser.add_argument(
+        "-c", "--num-cores", dest="num_cores", type=int,
+        help="Number of CPU cores to use for preprocessing. Defaults to all available."
+    )
+    parser.add_argument(
+        "--batch-size", dest="batch_size", type=int, default=32,
+        help="Per-device evaluation batch size."
+    )
 
-    fastain_found = False
-    for action in parser._actions:
-        if '--fastain' in action.option_strings:
-            action.required = True
-            # Append "(required)" to the help text so users see it in --help
-            action.help = (action.help or "") + "  (required)"
-            fastain_found = True
-            break
-    if not fastain_found:
-        raise RuntimeError("Parser did not define --fastain; cannot mark it required.")  # Sanity check
-
-
-    out_found = False
-    for action in parser._actions:
-        if '--out' in action.option_strings:
-            action.required = True
-            action.help = (action.help or "") + "  (required)"
-            out_found = True
-            break
-    if not out_found:
-        raise RuntimeError("Parser did not define --out; cannot mark it required.")
-
-    parser.set_defaults(ftmodel="neuralbioinfo/PhaStyle-mini") 
-
-    # Parse the arguments
     args = parser.parse_args()
-    user_provided_args = get_user_provided_args(args, parser)
-    input_args2check = list( (set(user_provided_args.keys()) - {'help'}) | {'ftmodel'})
-    parameter_group_names = list(prokbert_config.parameters.keys()) + ['inference']
-    # Initialize the input parameter set
-    parameters = {k: {} for k in parameter_group_names}
-    for provided_input_argument in input_args2check:
-        print(f'Setting: {provided_input_argument}')
-        param_group, param_name = cmd_argument2group_param[provided_input_argument]
-        act_value = getattr(args, provided_input_argument)
-        parameters[param_group][param_name] = act_value
 
-    requested_cores = getattr(args, "num_proc", None)
-    if requested_cores is not None:
-        cpu_cores = int(requested_cores)
+    # Determine CPU cores
+    if args.num_cores and args.num_cores > 0:
+        cpu_cores = args.num_cores
     else:
         cpu_cores = multiprocessing.cpu_count()
     print(f"Using {cpu_cores} CPU core(s) for preprocessing.")
-    parameters['finetuning']['num_cores']=cpu_cores
 
+    parameters = {
+        "finetuning": {
+            "ftmodel": args.ftmodel,
+            "num_cores": cpu_cores
+        },
+        "inference": {
+            "per_device_eval_batch_size": args.batch_size
+        }
+    }
     return parameters, args
-
 
 def prepare_model(model_path):
     """
